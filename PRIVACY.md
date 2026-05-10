@@ -1,54 +1,53 @@
-# Artblock — Privacy Policy
+# Artblock Brasil — Política de Privacidade
 
-*Last updated: 2026-04-19*
+*Última atualização: 2026-04-19*
 
-## Summary
+## Resumo
 
-**Artblock does not collect, store, or transmit any personal information, browsing history, or user data.** Everything it does happens locally in your browser.
+**O Artblock Brasil não coleta, armazena nem transmite nenhuma informação pessoal, histórico de navegação ou dados do usuário.** Tudo o que ele faz acontece localmente no seu navegador.
 
-## What Artblock does
+## O que o Artblock Brasil faz
 
-Artblock is a Chrome extension that replaces advertisements and sponsored content on the web pages you visit with artwork from three public collections:
+O Artblock Brasil é uma extensão para Chrome que substitui anúncios e conteúdo patrocinado nas páginas que você visita por obras de arte de dois acervos públicos brasileiros:
 
-- Art Institute of Chicago — [api.artic.edu](https://api.artic.edu)
-- The Metropolitan Museum of Art — [collectionapi.metmuseum.org](https://collectionapi.metmuseum.org)
-- NASA Image Library — [images-api.nasa.gov](https://images-api.nasa.gov)
+- Brasiliana Museus — [brasiliana.museus.gov.br](https://brasiliana.museus.gov.br)
+- Museu Histórico Nacional (IBRAM) — [mhn.acervos.museus.gov.br](https://mhn.acervos.museus.gov.br)
 
-## Data we collect
+## Dados que coletamos
 
-**None.**
+**Nenhum.**
 
-Specifically:
+Especificamente:
 
-- No personally identifiable information (name, email, address, ID).
-- No health, financial, authentication, or location data.
-- No browsing history. We never record, store, or send the URLs of pages you visit.
-- No user activity. We do not track clicks, keystrokes, scroll, or mouse movement.
-- No page content. The extension reads the DOM of the page you are viewing only in order to identify ad-shaped elements (by class name, element ID, or tag type) and replace them. That reading is done locally in your browser and is never transmitted anywhere.
-- No analytics, telemetry, accounts, or tracking pixels.
+- Nenhuma informação de identificação pessoal (nome, e-mail, endereço, CPF).
+- Nenhum dado de saúde, financeiro, de autenticação ou de localização.
+- Nenhum histórico de navegação. Nunca registramos, armazenamos ou enviamos as URLs das páginas que você visita.
+- Nenhuma atividade do usuário. Não rastreamos cliques, teclas digitadas, rolagem ou movimentos do mouse.
+- Nenhum conteúdo de página. A extensão lê o DOM da página que você está visualizando apenas para identificar elementos com aparência de anúncio (por nome de classe, ID do elemento ou tipo de tag) e substituí-los. Essa leitura é feita localmente no seu navegador e nunca é transmitida para nenhum lugar.
+- Nenhum analytics, telemetria, conta ou pixel de rastreamento.
 
-## Data we store locally on your device
+## Dados armazenados localmente no seu dispositivo
 
-Artblock uses the Chrome extension storage APIs to save:
+O Artblock Brasil utiliza as APIs de armazenamento de extensões do Chrome para salvar:
 
-- Your own settings — whether the extension is enabled and which art category you picked (`chrome.storage.sync`, so it follows you across Chrome installs signed in with the same Google account).
-- A local cache of artwork metadata (title, artist, image URL) fetched from the three public APIs above (`chrome.storage.local`), so the extension does not hit those APIs on every page load.
-- A session counter of how many ads have been replaced in the current browser session, for the toolbar badge (`chrome.storage.session`).
+- Suas próprias configurações — se a extensão está ativa e qual categoria de arte você escolheu (`chrome.storage.sync`, portanto acompanha você entre instalações do Chrome com a mesma conta Google).
+- Um cache local de metadados de obras (título, artista, URL da imagem) obtidos das APIs públicas acima (`chrome.storage.local`), para que a extensão não precise consultar essas APIs a cada carregamento de página.
+- Um contador de sessão com quantos anúncios foram substituídos na sessão atual do navegador, para o badge na barra de ferramentas (`chrome.storage.session`).
 
-None of this is transmitted off your device.
+Nada disso é transmitido para fora do seu dispositivo.
 
-## Network requests Artblock makes
+## Requisições de rede que o Artblock Brasil faz
 
-The only outbound network requests Artblock initiates are to the three public museum and NASA APIs listed above, and requests for artwork image files from those institutions' CDNs. Those requests contain only a generic search term (e.g. `"painting"`, `"nebula"`) and a result-page number. They do not include any identifier, cookie, or information about you or the website you are currently viewing.
+As únicas requisições de rede que o Artblock Brasil realiza são para as duas APIs públicas de museus listadas acima e para os arquivos de imagem das obras nos CDNs dessas instituições. Essas requisições contêm apenas um termo de busca genérico (ex.: `"modernismo"`, `"paisagem"`) e um número de página de resultados. Elas não incluem nenhum identificador, cookie ou informação sobre você ou o site que você está visitando.
 
-## Third parties
+## Terceiros
 
-Artblock does not share, sell, or transfer any data to any third party, because Artblock does not collect any data to share in the first place.
+O Artblock Brasil não compartilha, vende nem transfere nenhum dado a terceiros, pois simplesmente não coleta dados para compartilhar.
 
-## Changes to this policy
+## Alterações nesta política
 
-If this policy ever changes, the revised version will be published at the URL where you are reading this, with an updated "Last updated" date at the top.
+Caso esta política seja alterada, a versão revisada será publicada na URL onde você está lendo isto, com a data de "Última atualização" atualizada no topo.
 
-## Contact
+## Contato
 
-Questions: open an issue at the Artblock GitHub repository, or email the address listed on the Chrome Web Store listing for the extension.
+Dúvidas: abra uma issue no repositório do Artblock Brasil no GitHub.
