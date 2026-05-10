@@ -5,7 +5,7 @@
   const AR = window.__artReplacer;
   if (!AR) return;
 
-  const ALL_CATEGORIES = ['impressionism', 'japanese', 'photography', 'renaissance', 'modern', 'space'];
+  const ALL_CATEGORIES = ['modernismo', 'academismo', 'paisagem', 'historica', 'fotografia'];
   const CATEGORY_DEFAULTS = Object.fromEntries(ALL_CATEGORIES.map(k => [k, true]));
 
   const [syncSettings, localData] = await Promise.all([
@@ -27,49 +27,14 @@
 
   // ── Image URL helpers ────────────────────────────────────────────────────
 
-  function getImageUrl(artwork, targetWidth, targetHeight) {
-    if (artwork.imageId) {
-      const w = Math.min(Math.round(targetWidth * 2), 843);
-
-      if (artwork.width && artwork.height) {
-        const targetRatio = targetWidth / targetHeight;
-        const artRatio = artwork.width / artwork.height;
-        const ratioDiff = Math.abs(artRatio - targetRatio) / targetRatio;
-
-        if (ratioDiff > 0.2) {
-          let cropW, cropH, cropX, cropY;
-          if (targetRatio > artRatio) {
-            cropW = artwork.width;
-            cropH = Math.round(artwork.width / targetRatio);
-            cropX = 0;
-            cropY = Math.round((artwork.height - cropH) / 2);
-          } else {
-            cropH = artwork.height;
-            cropW = Math.round(artwork.height * targetRatio);
-            cropX = Math.round((artwork.width - cropW) / 2);
-            cropY = 0;
-          }
-          return `https://www.artic.edu/iiif/2/${artwork.imageId}/${cropX},${cropY},${cropW},${cropH}/${w},/0/default.jpg`;
-        }
-      }
-
-      return `https://www.artic.edu/iiif/2/${artwork.imageId}/full/${w},/0/default.jpg`;
-    }
-    return artwork.smallImageUrl || artwork.imageUrl || '';
-  }
+  // No IIIF, direct URLs for Tainacan/Wikimedia
+function getImageUrl(artwork, targetWidth) {
+  return artwork.smallImageUrl || artwork.imageUrl || '';
+}
 
   function getSourceUrl(art) {
-    if (art.id?.startsWith('artic:')) {
-      return `https://www.artic.edu/artworks/${art.id.slice(6)}`;
-    }
-    if (art.id?.startsWith('met:')) {
-      return `https://www.metmuseum.org/art/collection/search/${art.id.slice(4)}`;
-    }
-    if (art.id?.startsWith('nasa:')) {
-      return `https://images.nasa.gov/details/${encodeURIComponent(art.id.slice(5))}`;
-    }
-    return null;
-  }
+  return art.sourceUrl || null;
+}
 
   // ── Selector generation for persistence ─────────────────────────────────
 
@@ -161,7 +126,7 @@
       'font-family:-apple-system,BlinkMacSystemFont,sans-serif',
     ].join(';');
     btn.addEventListener('mouseenter', () => {
-      btn.style.background = 'rgba(107,76,154,0.85)';
+      btn.style.background = 'rgba(0,120,60,0.85)';
     });
     btn.addEventListener('mouseleave', () => {
       btn.style.background = 'rgba(0,0,0,0.65)';
@@ -202,7 +167,7 @@
       unblockElement(container);
     }));
 
-    controls.appendChild(makeButton('⚙', 'Artblock settings', () => {
+    controls.appendChild(makeButton('⚙', 'Artblock Brasil settings', () => {
       chrome.runtime.sendMessage({ type: 'OPEN_SETTINGS' }).catch(() => {});
     }));
 
