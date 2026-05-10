@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build Chrome and Firefox zip packages for Artblock.
+# Build Chrome and Firefox zip packages for Artblock Brasil.
 # Run from the repo root. Outputs artblock-{chrome,firefox}-v<version>.zip.
 #
 # Usage:
@@ -54,7 +54,7 @@ else
 fi
 
 shopt -s nullglob
-for old in artblock-chrome-v*.zip artblock-firefox-v*.zip; do
+for old in artblock-brasil-chrome-v*.zip artblock-brasil-firefox-v*.zip; do
   rm -f "$old"
   echo "removed $old"
 done
@@ -65,7 +65,7 @@ INCLUDE=(LICENSE background content styles popup icons)
 build() {
   local target="$1"      # chrome | firefox
   local manifest="$2"    # path to manifest file to use
-  local out="artblock-${target}-v${VERSION}.zip"
+  local out="artblock-brasil-${target}-v${VERSION}.zip"
 
   rm -f "$out"
   local stage
