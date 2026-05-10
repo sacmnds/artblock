@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Artblock",
+  "name": "Artblock Brasil",
   "version": "1.1.1",
-  "description": "Replaces every ad on the internet with fine art from the world's greatest museums.",
+  "description": "Substitui anúncios por obras de arte brasileiras de museus públicos.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "artblock@vuciv.github.io",
+      "id": "artblock-brasil@sacmnds.github.io",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": ["none"]
