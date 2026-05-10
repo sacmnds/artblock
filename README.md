@@ -1,65 +1,64 @@
-# Artblock
+# Artblock Brasil
 
-**Every ad on the internet, replaced with fine art.**
+> 🇧🇷 Fork do [artblock](https://github.com/vuciv/artblock) original, adaptado para exibir obras de arte brasileiras de museus públicos.
 
-Artblock is a Chrome extension that detects advertisements, sponsored content, affiliate widgets, and promotional clutter on the pages you visit and swaps them for artwork from three public, open-access collections:
+**Todo anúncio da internet, substituído por arte brasileira.**
 
-- 🏛 **Art Institute of Chicago** — paintings, Japanese woodblock prints, photography (Monet, Hokusai, O'Keeffe, and thousands more)
-- 🏛 **The Metropolitan Museum of Art** — centuries of painting, sculpture, and design
-- 🌌 **NASA Image Library** — nebulae, galaxies, Earthrise, the Pillars of Creation
+O Artblock Brasil é uma extensão para Chrome que detecta anúncios, conteúdo patrocinado, widgets de afiliados e lixo promocional nas páginas que você visita e os substitui por obras de dois acervos públicos brasileiros:
 
-## Features
+- 🏛 **Brasiliana Museus** — pintura, fotografia, documentos históricos e muito mais
+- 🏛 **Museu Histórico Nacional (IBRAM)** — séculos de arte e história do Brasil
 
-- Detects Google Ads, DoubleClick, Amazon, Taboola/Outbrain, MGID, RevContent, sponsored content, affiliate widgets, newsletter/paywall prompts
-- Categories: Impressionism, Japanese Woodblock, Renaissance, Photography, Modern/Contemporary, NASA Space, or Chaos Mode
-- Never shows you the same image twice in a session
-- Hover any replaced slot to see the title, artist, date, and source museum
-- Per-tab toolbar badge counts how many ads have been replaced on the current page
+## Funcionalidades
 
-## Install
+- Detecta Google Ads, DoubleClick, Amazon, Taboola/Outbrain, MGID, RevContent, conteúdo patrocinado, widgets de afiliados e prompts de paywall
+- Categorias: Modernismo, Academismo, Paisagem, História, Fotografia
+- Nunca exibe a mesma imagem duas vezes na mesma sessão
+- Passe o mouse sobre qualquer slot substituído para ver título, artista, data e museu de origem
+- Badge na barra de ferramentas conta quantos anúncios foram substituídos na aba atual
 
-### From the Chrome Web Store / Firefox Add-ons
+## Instalação
 
-_(Coming soon on both.)_
+### Chrome Web Store / Firefox Add-ons
 
-### Unpacked (development)
+_(Em breve.)_
+
+### Modo desenvolvedor (sem loja)
 
 **Chrome / Edge / Brave**
 
-1. Clone this repo: `git clone https://github.com/vuciv/artblock.git`
-2. Open `chrome://extensions`, enable **Developer mode**
-3. Click **Load unpacked**, select the repo root
-4. Visit any ad-supported site — the replacements happen automatically
+1. Clone este repositório: `git clone https://github.com/seu-usuario/artblock.git`
+2. Abra `chrome://extensions`, ative o **Modo do desenvolvedor**
+3. Clique em **Carregar sem compactação** e selecione a pasta do repositório
+4. Acesse qualquer site com anúncios — as substituições acontecem automaticamente
 
 **Firefox**
 
-1. Clone the repo
-2. Run `./build.sh` — produces `artblock-firefox-v1.0.0.zip`
-3. Open `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → select the zip (or the repo's `manifest.firefox.json`)
+1. Clone o repositório
+2. Execute `./build.sh` — gera `artblock-firefox-v1.0.0.zip`
+3. Abra `about:debugging#/runtime/this-firefox` → **Carregar extensão temporária** → selecione o zip (ou o `manifest.firefox.json` do repositório)
 
-## Building release packages
+## Gerando pacotes de lançamento
 
-```
-./build.sh
-```
+Gera `artblock-brasil-chrome-vX.Y.Z.zip` e `artblock-brasil-firefox-vX.Y.Z.zip`, prontos para upload nas respectivas lojas.
 
-Produces `artblock-chrome-vX.Y.Z.zip` and `artblock-firefox-vX.Y.Z.zip`, ready to upload to their respective stores. The Firefox build uses `manifest.firefox.json`, which adds `browser_specific_settings.gecko.id` (required by AMO) and an event-page `background.scripts` declaration for compatibility with Firefox 109+.
+## Como funciona
 
-## How it works
+- `content/detector.js` varre o DOM em busca de contêineres de anúncios via seletores CSS e heurísticas de tamanho IAB, ignorando correspondências aninhadas para substituir apenas o slot mais externo.
+- `content/observer.js` monitora anúncios injetados dinamicamente via `MutationObserver`.
+- `content/replacer.js` substitui cada slot detectado por uma `<img>` dimensionada para caber, com tooltip ao passar o mouse mostrando os metadados da obra.
+- `background/index.js` busca metadados das obras nas APIs públicas do Tainacan (Brasiliana Museus e IBRAM) e os armazena em cache por proporção de aspecto no `chrome.storage.local`, para que as substituições sejam instantâneas e não se repitam na sessão.
 
-- `content/detector.js` scans the DOM for ad containers via curated CSS selectors and IAB ad-size heuristics, skipping nested matches so only the outermost ad slot is replaced.
-- `content/observer.js` watches for dynamically-injected ads via `MutationObserver`.
-- `content/replacer.js` swaps each detected slot for an `<img>` sized to fit, with a hover tooltip showing the artwork metadata.
-- `background/service-worker.js` fetches art metadata from the three public APIs and caches it per aspect-ratio bucket in `chrome.storage.local`, so replacements are instant and never repeat within a session.
+## Privacidade
 
-## Privacy
+O Artblock Brasil não coleta **nada**. Sem analytics, sem contas, sem telemetria, sem histórico de navegação. As únicas requisições externas são para as APIs públicas dos museus brasileiros, e essas requisições carregam apenas um termo de busca genérico. Veja [PRIVACY.md](./PRIVACY.md).
 
-Artblock collects **nothing**. No analytics, no accounts, no telemetry, no browsing history. The only outbound requests it makes are to the three public museum/NASA APIs, and those requests carry nothing but a generic search term. See [PRIVACY.md](./PRIVACY.md).
+## Créditos
 
-## Credits
+Obras e imagens provenientes dos acervos abertos da [Brasiliana Museus](https://brasiliana.museus.gov.br) e do [Museu Histórico Nacional / IBRAM](https://mhn.acervos.museus.gov.br). Todos os metadados e imagens pertencem às respectivas instituições.
 
-Artwork and imagery are sourced from the open-access programs of the [Art Institute of Chicago](https://www.artic.edu/open-access), [The Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search-open-access), and [NASA](https://images.nasa.gov). All collection metadata and images remain the property of their respective institutions.
+Fork baseado no projeto original [vuciv/artblock](https://github.com/vuciv/artblock) — MIT License.
 
-## License
+## Licença
 
 [MIT](./LICENSE)
