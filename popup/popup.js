@@ -17,7 +17,7 @@ const importFile = document.getElementById('importFile');
 const profileFeedback = document.getElementById('profileFeedback');
 const hoverFeedback = document.getElementById('hoverFeedback');
 
-const CATEGORY_KEYS = ['impressionism', 'japanese', 'photography', 'renaissance', 'modern', 'space'];
+const CATEGORY_KEYS = ['modernismo', 'academismo', 'paisagem', 'historica', 'fotografia'];
 const CATEGORY_DEFAULTS = Object.fromEntries(CATEGORY_KEYS.map(k => [k, true]));
 const SYNC_DEFAULTS = { enabled: true, showHoverControls: true, categories: CATEGORY_DEFAULTS };
 
@@ -111,7 +111,7 @@ enabledToggle.addEventListener('change', () => chrome.storage.sync.set({ enabled
 
 hoverToggle.addEventListener('change', () => {
   chrome.storage.sync.set({ showHoverControls: hoverToggle.checked });
-  showFeedback(hoverFeedback, 'Refresh page to see effect.');
+  showFeedback(hoverFeedback, 'Recarregue a página.');
 });
 
 chaosModeToggle.addEventListener('change', () => {
@@ -131,8 +131,8 @@ CATEGORY_KEYS.forEach(k => {
 // Reset profile
 makeConfirmable(
   'resetProfile',
-  'Are you sure? This will permanently delete all your saved settings.',
-  'Confirm Reset Profile',
+  'Tem certeza? Isso excluirá permanentemente todas as suas configurações.',
+  'Confirmar redefinição',
   () => Promise.all([
     chrome.storage.sync.set(SYNC_DEFAULTS),
     chrome.storage.local.set({ unblockedElements: [] }),
@@ -141,7 +141,7 @@ makeConfirmable(
     hoverToggle.checked = SYNC_DEFAULTS.showHoverControls;
     CATEGORY_KEYS.forEach(k => { getCategoryCheckbox(k).checked = true; });
     updateChaosMode();
-    showFeedback(profileFeedback, 'Successfully reset. Refresh page to see effect.');
+    showFeedback(profileFeedback, 'Redefinido com sucesso. Recarregue a página para ver o efeito.');
   })
 );
 
@@ -156,12 +156,12 @@ getPageKey().then(pageKey => {
 
   makeConfirmable(
     'resetSite',
-    `Are you sure? This will permanently delete all your settings on ${hostname}`,
-    'Confirm Reset Site',
+    `Tem certeza? Isso excluirá suas configurações em ${hostname}`,
+    'Confirmar Reset do Site',
     () => chrome.storage.local.get({ unblockedElements: [] }, ({ unblockedElements }) => {
       chrome.storage.local.set({
         unblockedElements: unblockedElements.filter(e => e.pageKey !== pageKey),
-      }, () => showFeedback(profileFeedback, 'Successfully reset. Refresh page to see effect.'));
+      }, () => showFeedback(profileFeedback, 'Pronto. Recarregue a página meu camarada.'));
     })
   );
 });
@@ -192,7 +192,7 @@ function showFeedback(el, msg, isError = false) {
   el._timer = setTimeout(() => { el.textContent = ''; el.className = 'feedback'; }, 4000);
 }
 
-const VALID_CATEGORIES = ['all', 'impressionism', 'japanese', 'photography', 'renaissance', 'modern', 'space'];
+const VALID_CATEGORIES = ['all', 'modernismo', 'academismo', 'paisagem', 'historica', 'fotografia'];
 
 importFile.addEventListener('change', () => {
   const file = importFile.files[0];
@@ -200,7 +200,7 @@ importFile.addEventListener('change', () => {
   if (!file) return;
 
   if (!file.name.endsWith('.json')) {
-    showFeedback(profileFeedback, 'File must be a .json file.', true);
+    showFeedback(profileFeedback, 'O arquivo deve ser .json.', true);
     return;
   }
 
@@ -210,24 +210,24 @@ importFile.addEventListener('change', () => {
     try {
       data = JSON.parse(e.target.result);
     } catch {
-      showFeedback(profileFeedback, 'Invalid file — could not parse JSON.', true);
+      showFeedback(profileFeedback, 'Arquivo inválido, não foi possível parseá-lo.', true);
       return;
     }
 
     if (typeof data !== 'object' || data === null || Array.isArray(data)) {
-      showFeedback(profileFeedback, 'Invalid settings file format.', true);
+      showFeedback(profileFeedback, 'Formato de arquivo de configurações inválido.', true);
       return;
     }
 
     const hasKnownKey = ['enabled', 'category', 'showHoverControls', 'unblockedElements']
       .some(k => k in data);
     if (!hasKnownKey) {
-      showFeedback(profileFeedback, "File doesn't look like an Artblock settings export.", true);
+      showFeedback(profileFeedback, "O arquivo não parece ser uma exportação do Artblock Brasil.", true);
       return;
     }
 
     if ('category' in data && !VALID_CATEGORIES.includes(data.category)) {
-      showFeedback(profileFeedback, `Unknown category "${data.category}" in settings file.`, true);
+      showFeedback(profileFeedback, `Categoria desconhecida "${data.category}" no arquivo .`, true);
       return;
     }
 
@@ -250,7 +250,7 @@ importFile.addEventListener('change', () => {
       const cats = syncData.categories || CATEGORY_DEFAULTS;
       CATEGORY_KEYS.forEach(k => { getCategoryCheckbox(k).checked = cats[k] ?? true; });
       updateChaosMode();
-      showFeedback(profileFeedback, 'Successfully imported settings. Refresh page to see effect.');
+      showFeedback(profileFeedback, 'Configurações importadas com sucesso. Recarregue a página.');
     });
   };
   reader.readAsText(file);
