@@ -26,7 +26,7 @@ body {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
-  background: linear-gradient(135deg, #c4a7e7, #e0a8d0);
+  background: linear-gradient(135deg, #009c3b, #FFDF00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -88,7 +88,7 @@ body {
 }
 
 .toggle input:checked + .slider {
-  background: #6B4C9A;
+  background: #2d7a4f;
 }
 
 .toggle input:checked + .slider::before {
@@ -125,7 +125,7 @@ body {
 }
 
 .setting-row select:focus {
-  border-color: #6B4C9A;
+  border-color: #2d7a4f;
 }
 
 .setting-row select optgroup {
@@ -151,7 +151,7 @@ body {
   display: block;
   font-size: 32px;
   font-weight: 700;
-  background: linear-gradient(135deg, #c4a7e7, #e0a8d0);
+  background: linear-gradient(135deg, #009c3b, #FFDF00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -262,13 +262,13 @@ body {
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(108, 75, 155, 1);
+  color: rgba(0, 156, 59, 1);
   cursor: pointer;
   text-align: left;
 }
 
 .reset-btn:hover {
-  color: rgba(108, 75, 155, .8);
+  color: rgba(0, 156, 59, 0.8);
 }
 
 .reset-confirm {
@@ -358,6 +358,6 @@ body {
 }
 
 .action-btn:hover {
-  background: rgba(107, 76, 154, 0.3);
-  border-color: rgba(107, 76, 154, 0.5);
+  background: rgba(0, 120, 60, 0.3);
+  border-color: rgba(0, 120, 60, 0.6);
 }
